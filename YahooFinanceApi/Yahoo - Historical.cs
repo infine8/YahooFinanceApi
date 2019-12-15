@@ -55,7 +55,8 @@ namespace YahooFinanceApi
             using (var stream = await GetResponseStreamAsync(symbol, startTime, endTime, period, showOption.Name(), token).ConfigureAwait(false))
 			using (var sr = new StreamReader(stream))
 			using (var csvReader = new CsvReader(sr))
-			{
+            {
+                csvReader.Configuration.Delimiter = ",";
                 csvReader.Read(); // skip header
 
                 var ticks = new List<ITick>();
