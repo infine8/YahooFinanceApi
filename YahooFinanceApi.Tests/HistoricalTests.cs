@@ -179,5 +179,12 @@ namespace YahooFinanceApi.Tests
             Assert.Equal(from, candles.First().DateTime.AddDays(1));
             Assert.Equal(to, candles.Last().DateTime.AddDays(1));
         }
+
+        [Fact]
+        public async Task TestHistorical()
+        {
+            var history = await Yahoo.GetHistoricalAsync("XBI", DateTime.Now.AddDays(-7), DateTime.Now, Period.Daily);
+
+        }
     }
 }

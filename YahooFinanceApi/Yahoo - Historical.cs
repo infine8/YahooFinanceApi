@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Net;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace YahooFinanceApi
 {
@@ -54,7 +55,7 @@ namespace YahooFinanceApi
         {
             using (var stream = await GetResponseStreamAsync(symbol, startTime, endTime, period, showOption.Name(), token).ConfigureAwait(false))
 			using (var sr = new StreamReader(stream))
-			using (var csvReader = new CsvReader(sr))
+			using (var csvReader = new CsvReader(sr, CultureInfo.InvariantCulture))
             {
                 csvReader.Configuration.Delimiter = ",";
                 csvReader.Read(); // skip header
